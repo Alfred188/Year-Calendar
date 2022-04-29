@@ -39,7 +39,7 @@
 
             var day = 1;
             const dy = new Date(year + '/' + (m + 1) + '/' + day);
-            var stertDay = dy.getDay();
+            var startDay = dy.getDay();
 
             var dim = daysInMonth((m + 1), year);
 
@@ -47,8 +47,7 @@
             for (var w = 0; w < 6; w++) {
                 str += "<tr role=\"row\" class=\"odd\">";
                 for (var d = 0; d < 7; d++) {
-                    //alert(stertDay + '/' + w);
-                    if (stertDay == d) {
+                    if (startDay == d) {
                         start = true;
                     }
                     if (start) {
@@ -71,7 +70,7 @@
                                 if (element.date == (year + "-" + ms + "-" + ds)) {
                                     isDate = true;
                                     bg = element.color;
-                                    title = " onclick=\"alert('" + element.title + "');\"";
+                                    title = " onclick=\"showMoreData('" + element.title + "','" + element.text + "');\"";
                                 }
                             });
                             if (bg.toLowerCase() == "light" || bg.toLowerCase() == "warning") {
@@ -81,13 +80,9 @@
                             }
                             // if (isDate) {
                             str += "<td class=\"rounded text-" + fg + " bg-" + bg + "\" " + title + ">" + day + "</td>";
-                            // } else {
-                            //     str += "<td>" + day + "</td>";
-                            // }
 
                             day++;
                         } else {
-                            //alert(check + 'day');
                             str += "<td class=\"sorting_1\"></td>";
                         }
                     } else {
@@ -99,10 +94,26 @@
             str += "</tbody></table></div>";
         }
         str += "</div>";
+        str += "<div class=\"modal fade\" id=\"CalModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">" +
+            "<div class=\"modal-dialog\" role=\"document\"><div class=\"modal-content\"><div class=\"modal-header\">" +
+            "<h5 class=\"modal-title\" id=\"dataTitle\">title</h5>" +
+            "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">" +
+            "<span aria-hidden=\"true\">&times;</span></button></div>" +
+            "<div class=\"modal-body\" id=\"dataText\"></div><div class=\"modal-footer\">" +
+            "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>" +
+            "</div></div></div></div>";
         return str;
     }
+
+
 
     function daysInMonth(month, year) {
         return new Date(year, month, 0).getDate();
     }
 })(jQuery);
+
+function showMoreData(title, text) {
+    $('#dataTitle').html(title);
+    $('#dataText').html(text);
+    $('#CalModal').modal('show');
+}
