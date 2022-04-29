@@ -66,10 +66,12 @@
                             var isDate = false;
                             var bg = "light";
                             var fg = "light";
+                            var title = "";
                             date.forEach(element => {
                                 if (element.date == (year + "-" + ms + "-" + ds)) {
                                     isDate = true;
                                     bg = element.color;
+                                    title = " onclick=\"alert('" + element.title + "');\"";
                                 }
                             });
                             if (bg.toLowerCase() == "light" || bg.toLowerCase() == "warning") {
@@ -78,7 +80,7 @@
                                 fg = "light";
                             }
                             // if (isDate) {
-                            str += "<td class=\"rounded text-" + fg + " bg-" + bg + "\">" + day + "</td>";
+                            str += "<td class=\"rounded text-" + fg + " bg-" + bg + "\" " + title + ">" + day + "</td>";
                             // } else {
                             //     str += "<td>" + day + "</td>";
                             // }
