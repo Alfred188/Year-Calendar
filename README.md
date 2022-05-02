@@ -8,7 +8,7 @@ _ place this part in header
 <link href="~/year-calendar.css" rel="stylesheet" type="text/css">
 ```
 
-_ place this parts befor </body> tag
+_ place this parts befor body end tag
 ```
 <script src="~/year-calendar/js/year-calendar.js" type='text/javascript'></script>   
 <script>
