@@ -1,5 +1,5 @@
 # Year-Calendar
-A yearlly calnder plugin
+A yearly calnder plugin
 * Tested with bootstrap 4
 
 ## How to use
