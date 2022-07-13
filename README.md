@@ -14,6 +14,7 @@ _ place this parts before body end tag
 <script>
         $('#calendar').Calendar({year:'2022', //default year to preview, years start from 2022
                                 displayYear:9, //Count of years
+                                yearly: true,
                                 date:[{"date":"2022-01-27","color":"danger","title":"MyTitle","text":"MyText"}, //date list to mark on calendar
                                     {"date":"2022-02-02","color":"secondary","title":"MyTitle","text":"MyText"},
                                     {"date":"2022-02-28","color":"warning","title":"MyTitle","text":"MyText"},
