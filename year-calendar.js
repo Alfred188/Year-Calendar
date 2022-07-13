@@ -1,5 +1,8 @@
 (function($) {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    //const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    //const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    // });
 
     $.fn.Calendar = function(options) {
         var settings = $.extend({
@@ -23,6 +26,8 @@
     function calendarFunc(e, year, date, displayYear) {
         var xDate = JSON.stringify(date);
         xDate = xDate.replaceAll("\"", "'");
+        //alert(xDate);
+        //date = date.map(x => "'" + x + "'").toString();
 
         var str = "";
         str += "<div class=\"col-12 col-md-12 col-lg-12 text-center text-light bg-dark\"><ul class=\"ul\">";
@@ -109,13 +114,22 @@
     function monthcalendarFunc(e, year, date,month) {
         var xDate = JSON.stringify(date);
         xDate = xDate.replaceAll("\"", "'");
+        //alert(xDate);
+        //date = date.map(x => "'" + x + "'").toString();
 
         var str = "";
         str += "<div id=\"YearTitle\" class=\"col-12 col-md-12 col-lg-12 text-center text-light bg-dark\">" +
             "<h3>" + year + "</h3></div>";
         m = month - 1;
-            
-            str += "<div class=\"col-12 col-md-12 col-lg-12\"><div class=\"row\"><div class=\"col-12 col-md-12 col-lg-12 text-center text-light bg-dark\"><h5>" + months[m] + "</h5></div></div>" +
+
+        var pm = (month - 1 < 1)? 1 : month - 1;
+        var nm = (month + 1 > 12)? 12 : month + 1;
+        
+            str += "<div class=\"col-12 col-md-12 col-lg-12\"><div class=\"row\"><div class=\"col-1 col-md-1 col-lg-1 text-center text-light bg-dark\">" +
+            "<a class=\"text-white\" href=\"#\" onclick=\"$('#" + e + "').Calendar({year: '" + year + "',yearly:false,month:" + pm + ",date:" + xDate + "});\"><b><</b></a></div>"+
+            "<div class=\"col-10 col-md-10 col-lg-10 text-center text-light bg-dark\"><h5>" + months[m] + "</h5></div>" +
+            "<div class=\"col-1 col-md-1 col-lg-1 text-center text-light bg-dark\">" +
+            "<a class=\"text-white\" href=\"#\" onclick=\"$('#" + e + "').Calendar({year: '" + year + "',yearly:false,month:" + nm + ",date:" + xDate + "});\"><b>></b></a></div></div>" +
                 "<table class=\"table align-items-center table-flush table-hover dataTable\" id=\"dataTableHover\" role=\"grid\" aria-describedby=\"dataTableHover_info\">" +
                 "<thead class=\"thead-light\"><tr role=\"row\"><th >sun</th><th >Mon</th><th >Tue</th>" +
                 "<th >Wed</th><th >Thu</th><th >Fri</th>" +
