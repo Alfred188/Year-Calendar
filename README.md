@@ -10,7 +10,7 @@ _ place this part in header
 
 _ place this parts before body end tag
 ```
-<script src="~/year-calendar/js/year-calendar.js" type='text/javascript'></script>   
+<script src="~/year-calendar.js" type='text/javascript'></script>   
 <script>
         $('#calendar').Calendar({year:'2022', //default year to preview, years start from 2022
                                 displayYear:9, //Count of years
