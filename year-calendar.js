@@ -7,7 +7,7 @@
     $.fn.Calendar = function(options) {
         var settings = $.extend({
             // These are the defaults.
-            year: "2022",
+            year: new Date().getFullYear(),
             month: 1,
             yearly: true,
             displayYear: 8,
@@ -118,22 +118,36 @@
         //date = date.map(x => "'" + x + "'").toString();
 
         var str = "";
-        str += "<div id=\"YearTitle\" class=\"col-12 col-md-12 col-lg-12 text-center text-light bg-dark\">" +
-            "<h3>" + year + "</h3></div>";
+        str += "<div id=\"YearTitle\" class=\"col-12 col-md-12 col-lg-12 text-center text-light bg-dark\"><h3>" + year + "</h3></div>";
         m = month - 1;
 
-        var pm = (month - 1 < 1)? 1 : month - 1;
-        var nm = (month + 1 > 12)? 12 : month + 1;
-        
-            str += "<div class=\"col-12 col-md-12 col-lg-12\"><div class=\"row\"><div class=\"col-1 col-md-1 col-lg-1 text-center text-light bg-dark\">" +
-            "<a class=\"text-white\" href=\"#\" onclick=\"$('#" + e + "').Calendar({year: '" + year + "',yearly:false,month:" + pm + ",date:" + xDate + "});\"><b><</b></a></div>"+
-            "<div class=\"col-10 col-md-10 col-lg-10 text-center text-light bg-dark\"><h5>" + months[m] + "</h5></div>" +
+                var pyear = parseInt(year);
+        var nyear = parseInt(year);
+        var pm = month;
+        if (month - 1 < 1) {
+            pm = 12;
+            pyear = parseInt(year) - 1;
+        } else
+            pm = month - 1;
+
+        var nm = month;
+        if (month + 1 > 12) {
+            nm = 1;
+            nyear = parseInt(year) + 1;
+        } else
+            nm = month + 1;
+
+
+        str += "<div class=\"container-fluid\"><div class=\"row d-flex justify-content-between bg-dark\"><div class=\"col-1 col-md-1 col-lg-1 text-center text-light\">" +
+            "<a class=\"text-white\" href=\"#\" onclick=\"$('#" + e + "').Calendar({year: '" + pyear + "',yearly:false,month:" + pm + ",date:" + xDate + "});\"><b><</b></a></div>" +
+            "<div class=\"col-9 col-md-9 col-lg-9 text-center text-light bg-dark\"><h5>" + months[m] + "</h5></div>" +
             "<div class=\"col-1 col-md-1 col-lg-1 text-center text-light bg-dark\">" +
-            "<a class=\"text-white\" href=\"#\" onclick=\"$('#" + e + "').Calendar({year: '" + year + "',yearly:false,month:" + nm + ",date:" + xDate + "});\"><b>></b></a></div></div>" +
-                "<table class=\"table align-items-center table-flush table-hover dataTable\" id=\"dataTableHover\" role=\"grid\" aria-describedby=\"dataTableHover_info\">" +
-                "<thead class=\"thead-light\"><tr role=\"row\"><th >sun</th><th >Mon</th><th >Tue</th>" +
-                "<th >Wed</th><th >Thu</th><th >Fri</th>" +
-                "<th >Sat</th></tr></thead><tbody>";
+            "<a class=\"text-white\" href=\"#\" onclick=\"$('#" + e + "').Calendar({year: '" + nyear + "',yearly:false,month:" + nm + ",date:" + xDate + "});\"><b>></b></a></div></div>" +
+            "<div class=\"row\"><div class=\"col-12 col-md-12 col-lg-12 text-center table-responsive\">" +
+            "<table class=\"table align-items-center table-flush table-hover dataTable\" id=\"dataTableHover\" role=\"grid\" aria-describedby=\"dataTableHover_info\">" +
+            "<thead class=\"thead-light\"><tr role=\"row\"><th >sun</th><th >Mon</th><th >Tue</th>" +
+            "<th >Wed</th><th >Thu</th><th >Fri</th>" +
+            "<th >Sat</th></tr></thead><tbody>";
 
             var day = 1;
             const dy = new Date(year + '/' + (m + 1) + '/' + day);
@@ -189,9 +203,9 @@
                 }
                 str += "</tr>";
             }
-            str += "</tbody></table></div>";
-        
-        str += "</div>";
+             str += "</tbody></table>";
+
+        str += "</div></div></div>";
         str += "<div class=\"modal fade\" id=\"CalModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">" +
             "<div class=\"modal-dialog\" role=\"document\"><div class=\"modal-content\"><div class=\"modal-header\">" +
             "<h5 class=\"modal-title\" id=\"dataTitle\">title</h5>" +
